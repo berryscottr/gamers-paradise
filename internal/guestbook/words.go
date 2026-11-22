@@ -32,7 +32,7 @@ func Mask(s string) string {
 			j++
 		}
 		word := runes[i:j]
-		if bad(normalize(word)) {
+		if bad(word) {
 			out = append(out, word[0])
 			for range word[1:] {
 				out = append(out, '*')
@@ -50,38 +50,49 @@ func isWordRune(r rune) bool {
 	return unicode.IsLetter(r) || unicode.IsDigit(r) || l
 }
 
-func normalize(w []rune) string {
+// plain lowercases and undoes look-alike characters.
+func plain(w []rune) string {
 	var b strings.Builder
-	var last rune
 	for _, r := range w {
 		r = unicode.ToLower(r)
 		if m, ok := leet[r]; ok {
 			r = m
 		}
-		if r == last { // "fuuuck" -> "fuck"
-			continue
-		}
-		last = r
 		b.WriteRune(r)
 	}
 	return b.String()
 }
 
-func bad(w string) bool {
+// collapse also squeezes repeated letters: "fuuuck" -> "fuck".
+func collapse(s string) string {
+	var b strings.Builder
+	var last rune
+	for _, r := range s {
+		if r != last {
+			b.WriteRune(r)
+		}
+		last = r
+	}
+	return b.String()
+}
+
+func bad(word []rune) bool {
+	p := plain(word)
+	c := collapse(p)
 	for _, a := range anywhere {
-		if strings.Contains(w, dedupe(a)) {
+		if strings.Contains(c, collapse(a)) {
 			return true
 		}
 	}
 	for _, x := range whole {
 		for _, e := range endings {
-			if w == dedupe(x+e) {
+			full := x + e
+			// Collapsed matches only count when the word is at least as long
+			// as the bad one, so "as" isn't mistaken for "ass".
+			if p == full || (c == collapse(full) && len(p) >= len(full)) {
 				return true
 			}
 		}
 	}
 	return false
 }
-
-// dedupe collapses doubled letters the same way normalize does.
-func dedupe(s string) string { return normalize([]rune(s)) }

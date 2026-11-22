@@ -76,6 +76,10 @@ func TestMask(t *testing.T) {
 		"classic assassin moves": "classic assassin moves",
 		"nice room":              "nice room",
 		"motherfucker":           "m***********",
+		"sick as heck":           "sick as heck",
+		"pass the glass":         "pass the glass",
+		"what an a$$":            "what an a**",
+		"you asss":               "you a***",
 	} {
 		if got := Mask(in); got != want {
 			t.Errorf("Mask(%q) = %q, want %q", in, got, want)
