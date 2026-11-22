@@ -1,0 +1,20 @@
+{{define "main"}}
+<div class="handheld">
+  <div class="screen">
+    <h1>{{art "title-gameboy" "Game Boy"}}</h1>
+    {{say "gameboy-intro"}}
+    <h2>Grass starters, always</h2>
+    {{say "gameboy-grass"}}
+    <h2>Status conditions are OP</h2>
+    {{say "gameboy-status"}}
+    <table class="status-chart">
+      <tr><th>Condition</th><th>What it does to a gym leader</th></tr>
+      <tr><td>SLP</td><td>Can't move. You get free turns.</td></tr>
+      <tr><td>PAR</td><td>Slowed down, and sometimes can't move at all.</td></tr>
+      <tr><td>PSN</td><td>Chips away every turn while you stall.</td></tr>
+    </table>
+  </div>
+  <div class="controls"><span class="dpad"></span><span class="ab"><span>B</span><span>A</span></span></div>
+  <p class="back"><a href="/">&larr; Back to the bedroom</a></p>
+</div>
+{{end}}

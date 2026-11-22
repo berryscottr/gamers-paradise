@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{.Title}}</title>
+<meta name="description" content="Gamer's Paradise: spend a day in my childhood.">
+<link rel="icon" href="/static/art/favicon.png" type="image/png">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/art/hotspots.css">
+<script type="module" src="/static/site.js"></script>
+</head>
+<body class="era-{{.Era}}">
+<div id="page">
+  <div id="masthead">
+    <a href="/" class="logo">{{art "title-home" "Gamer's Paradise"}}</a>
+    <div class="tagline">Spend a day in my childhood</div>
+    <button type="button" id="sound" class="sound" aria-pressed="false" title="Sound is off. Click to turn it on.">{{art "speaker-off" "Sound off"}}</button>
+  </div>
+  <ul id="nav">
+    <li><a href="/"{{if eq .Nav "home"}} class="on"{{end}}>Bedroom</a></li>
+    <li><a href="/gameboy"{{if eq .Nav "gameboy"}} class="on"{{end}}>Game Boy</a></li>
+    <li><a href="/xbox"{{if eq .Nav "xbox"}} class="on"{{end}}>Xbox years</a></li>
+    <li><a href="/shelf"{{if eq .Nav "shelf"}} class="on"{{end}}>The shelf</a></li>
+    <li><a href="/now"{{if eq .Nav "now"}} class="on"{{end}}>Right now</a></li>
+    <li><a href="/arcade"{{if eq .Nav "arcade"}} class="on"{{end}}>Arcade</a></li>
+    <li><a href="/guestbook"{{if eq .Nav "guestbook"}} class="on"{{end}}>Guestbook</a></li>
+    <li><a href="/links"{{if eq .Nav "links"}} class="on"{{end}}>Top 8</a></li>
+  </ul>
+  <div id="main">
+{{template "main" .}}
+  </div>
+  <div id="footer">
+    <div class="counter">Visitors <span class="odo">{{range .Visitors}}<span>{{.}}</span>{{end}}</span></div>
+    <a href="/links" class="badge">{{art "button" "Gamer's Paradise"}}</a>
+    <p>&copy; 2026 Sir Games-A-Lot &middot; Best viewed at 1024&times;768 &middot; <a href="/box">What's coming</a></p>
+  </div>
+</div>
+</body>
+</html>

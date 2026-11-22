@@ -1,0 +1,20 @@
+{{define "main"}}
+<h1>{{art "title-now" "Right now"}}</h1>
+{{say "now-intro"}}
+<div class="triptych">
+  <div class="panel p-hades">
+    <h2>Hades</h2>
+    {{say "now-hades"}}
+  </div>
+  <div class="panel p-persona">
+    <h2>Persona</h2>
+    {{say "now-persona"}}
+  </div>
+  <div class="panel p-jojo">
+    <h2>JoJo's Bizarre Adventure</h2>
+    {{say "now-jojo"}}
+    <p class="menace" aria-hidden="true">&#12468;&#12468;&#12468;&#12468;</p>
+  </div>
+</div>
+<p class="back"><a href="/">&larr; Back to the bedroom</a></p>
+{{end}}

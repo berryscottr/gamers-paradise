@@ -1,0 +1,17 @@
+{{define "main"}}
+<h1>{{art "title-links" "Top 8"}}</h1>
+{{say "links-intro"}}
+<div class="profile">
+  <div class="profile-head">Sir Games-A-Lot's Friend Space</div>
+  <ul class="top8">
+  {{range $i, $site := .TopEight}}
+    <li>{{if $site}}<a href="{{$site}}" rel="noopener">{{$site}}</a>{{else}}<span class="open">open slot</span>{{end}}</li>
+  {{end}}
+  </ul>
+</div>
+<h2>Link to me</h2>
+<p>{{art "button" "Gamer's Paradise"}}</p>
+<p>Copy this onto your site:</p>
+<textarea class="code" readonly rows="3" cols="80">&lt;a href="{{.SiteURL}}"&gt;&lt;img src="{{.SiteURL}}/static/art/button.png" width="88" height="31" alt="Gamer's Paradise"&gt;&lt;/a&gt;</textarea>
+<p class="back"><a href="/">&larr; Back to the bedroom</a></p>
+{{end}}

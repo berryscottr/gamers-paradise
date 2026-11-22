@@ -1,0 +1,136 @@
+# CI for every pull request and every push to main.
+#
+# main is protected: changes land only through PRs, and these checks must
+# pass first. Railway waits for them too before deploying main (checkSuites
+# in .railway/railway.ts), so a red run never reaches production.
+#
+# Hardening (ADR-008): every action is pinned to a full commit SHA, the
+# token is read-only by default, checkout doesn't keep credentials, and
+# tool versions are pinned.
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  STATICCHECK_VERSION: "2026.2.2"
+  GOVULNCHECK_VERSION: "v1.10.0"
+  GITLEAKS_VERSION: "v8.30.1"
+  ZIZMOR_VERSION: "1.33.0"
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: ./go.mod
+      - name: gofmt
+        run: test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)
+      - name: go vet
+        run: go vet ./...
+      - name: staticcheck
+        run: go run "honnef.co/go/tools/cmd/staticcheck@${STATICCHECK_VERSION}" ./...
+      - name: go.mod is tidy
+        run: go mod tidy && git diff --exit-code
+      - name: Generated art matches the code
+        run: go run ./cmd/artgen && git diff --exit-code && test -z "$(git status --porcelain)"
+
+  test:
+    name: Tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: paradise
+          POSTGRES_PASSWORD: paradise
+          POSTGRES_DB: paradise_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U paradise" --health-interval 2s --health-retries 20
+    env:
+      COVERAGE_FLOOR: "75"
+      # Throwaway CI database, not a secret.
+      TEST_DATABASE_URL: postgres://paradise:paradise@localhost:5432/paradise_test?sslmode=disable
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: ./go.mod
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      - name: go test -race (with Postgres)
+        run: go test -race -count=1 -coverprofile=coverage.out ./...
+      - name: Coverage floor
+        run: |
+          total=$(go tool cover -func=coverage.out | awk '/^total:/ {sub("%","",$3); print $3}')
+          echo "Total coverage: ${total}% (floor ${COVERAGE_FLOOR}%)"
+          echo "### Coverage: ${total}%" >> "$GITHUB_STEP_SUMMARY"
+          awk -v t="$total" -v f="$COVERAGE_FLOOR" 'BEGIN { exit (t + 0 < f + 0) }' || (echo "::error::Coverage ${total}% is below ${COVERAGE_FLOOR}%"; exit 1)
+      - name: Game and page logic (node --test)
+        run: node --test internal/web/jstest/
+
+  security:
+    name: Security
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # gitleaks scans the whole history
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: ./go.mod
+      - name: Known vulnerabilities (modules and standard library)
+        run: go run "golang.org/x/vuln/cmd/govulncheck@${GOVULNCHECK_VERSION}" ./...
+      - name: Secrets in git history (gitleaks)
+        run: go run "github.com/zricethezav/gitleaks/v8@${GITLEAKS_VERSION}" git --redact --verbose .
+      - name: Workflow security (zizmor)
+        run: pipx run "zizmor==${ZIZMOR_VERSION}" --format plain .github/workflows
+
+  docker:
+    name: Docker image
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: docker build
+        run: docker build --tag gamers-paradise:ci .
+      - name: The image serves the site
+        run: |
+          docker run -d --name gp -p 8080:8080 gamers-paradise:ci
+          for i in $(seq 1 20); do curl -fsS localhost:8080/healthz && break; sleep 1; done
+          curl -fsS -A "Mozilla/5.0 CI" localhost:8080/ | grep -q "Spend a day in my childhood"
+          docker rm -f gp
+
+  dependency-review:
+    name: Dependency review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/dependency-review-action@bbc44d14a204704ccc493733616cd1e93a0321ec # v5.0.1
+        with:
+          fail-on-severity: moderate

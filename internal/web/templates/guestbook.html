@@ -1,0 +1,25 @@
+{{define "main"}}
+<h1>{{art "title-guestbook" "Guestbook"}}</h1>
+<div class="paper">
+{{say "guestbook-intro"}}
+{{if .Signed}}<p class="thanks">Thanks for signing!</p>{{end}}
+{{if .Problems}}<ul class="problems">{{range .Problems}}<li>{{.}}</li>{{end}}</ul>{{end}}
+<form method="post" action="/guestbook" class="sign">
+  <p><label for="gb-name">Name</label><br><input id="gb-name" name="name" maxlength="40" required value="{{.Form.Name}}" autocomplete="nickname"></p>
+  <p><label for="gb-homepage">Homepage (optional)</label><br><input id="gb-homepage" name="homepage" type="url" maxlength="200" placeholder="https://" value="{{.Form.Homepage}}"></p>
+  <p class="hp"><label for="gb-email">Leave this empty</label><input id="gb-email" name="email" tabindex="-1" autocomplete="off"></p>
+  <p><label for="gb-message">Message</label><br><textarea id="gb-message" name="message" maxlength="500" rows="5" cols="60" required>{{.Form.Message}}</textarea></p>
+  <p><button type="submit">Sign the guestbook</button></p>
+  <p class="small">Signatures show up right away. Links in messages are removed, and some words get masked. Be nice.</p>
+</form>
+<h2 id="entries">Signatures</h2>
+{{range .Entries}}
+<div class="entry">
+  <p class="who">{{if .Homepage}}<a href="{{.Homepage}}" rel="ugc nofollow noopener" target="_blank">{{.Name}}</a>{{else}}<b>{{.Name}}</b>{{end}} <span class="when">{{.Created.Format "Jan 2, 2006"}}</span></p>
+  <p class="msg">{{.Message}}</p>
+</div>
+{{else}}
+<p class="empty">No signatures yet. Be the first!</p>
+{{end}}
+</div>
+{{end}}

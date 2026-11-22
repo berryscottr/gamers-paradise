@@ -1,0 +1,40 @@
+{{define "main"}}
+<h1>{{art "title-shelf" "The shelf"}}</h1>
+{{say "shelf-intro"}}
+<div class="plank">
+  <h2>The games, roughly in order</h2>
+  <ul class="spines">
+    <li class="sp-green"><a href="/gameboy">Pok&eacute;mon</a> <span>Game Boy Color, tons of it</span></li>
+    <li class="sp-black"><a href="/xbox#need-for-speed">Need for Speed</a> <span>Xbox</span></li>
+    <li class="sp-red"><a href="/xbox#tony-hawk">Tony Hawk's</a> <span>Xbox</span></li>
+    <li class="sp-blue"><a href="/xbox#kotor">Knights of the Old Republic</a> <span>Xbox</span></li>
+    <li class="sp-gold"><a href="#baldurs-gate">Baldur's Gate</a> <span>PC</span></li>
+    <li class="sp-orange"><a href="#flash">Miniclip and Addicting Games</a> <span>the new laptop, Christmas 2005</span></li>
+    <li class="sp-grey"><a href="/xbox#guitar-hero">Guitar Hero 3</a> <span>expert, and "One"</span></li>
+    <li class="sp-navy"><a href="#myspace">MySpace</a> <span>a few years later</span></li>
+    <li class="sp-crimson"><a href="/now">Hades</a> <span>now</span></li>
+    <li class="sp-purple"><a href="/now">Persona</a> <span>now</span></li>
+  </ul>
+</div>
+<div class="plank">
+  <h2>The minis</h2>
+  <ul class="minis">
+    <li><b>The d20 and the tiny adventuring party:</b> Baldur's Gate.</li>
+    <li><b>The laser sword on its stand:</b> Knights of the Old Republic.</li>
+    <li><b>The skateboard under the desk:</b> Tony Hawk's. It's also a <a href="/arcade/skate">game</a>.</li>
+  </ul>
+</div>
+<div class="plank" id="baldurs-gate">
+  <h2>Baldur's Gate</h2>
+  {{say "shelf-baldurs-gate"}}
+</div>
+<div class="plank" id="flash">
+  <h2>Miniclip and Addicting Games</h2>
+  {{say "shelf-flash"}}
+</div>
+<div class="plank" id="myspace">
+  <h2>MySpace</h2>
+  {{say "shelf-myspace"}}
+</div>
+<p class="back"><a href="/">&larr; Back to the bedroom</a></p>
+{{end}}

@@ -1,0 +1,10 @@
+# Never send secrets or local clutter into an image build.
+.env
+.env.*
+.git/
+.github/
+.claude/
+.railway/
+docs/
+*.exe
+coverage.out

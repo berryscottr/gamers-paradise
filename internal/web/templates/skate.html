@@ -1,0 +1,18 @@
+{{define "main"}}
+<h1>{{art "title-skate" "Half-Pipe Hero"}}</h1>
+<div class="cabinet">
+  <canvas id="skate" width="640" height="400" tabindex="0" aria-label="Half-Pipe Hero game. Press Enter to start.">Half-Pipe Hero needs JavaScript and a canvas.</canvas>
+</div>
+<table class="howto">
+  <tr><th colspan="2">How to play</th></tr>
+  <tr><td><kbd>Enter</kbd></td><td>Start, or play again</td></tr>
+  <tr><td><kbd>&darr;</kbd> or <kbd>Space</kbd></td><td>Pump at the bottom of the pipe to build speed</td></tr>
+  <tr><td><kbd>Z</kbd> + arrow</td><td>Flip tricks in the air</td></tr>
+  <tr><td><kbd>X</kbd> + arrow (hold)</td><td>Grabs. Hold longer for more points, but let go before you land</td></tr>
+  <tr><td><kbd>A</kbd> or <kbd>D</kbd> (hold)</td><td>Spin. Every 180 counts, but finish it before you land</td></tr>
+  <tr><td><kbd>P</kbd></td><td>Pause</td></tr>
+</table>
+<p>Each air's tricks multiply together. Land clean to bank them and build your streak (up to &times;5). Bail and the streak resets. You get 90 seconds.</p>
+<p class="back"><a href="/arcade">&larr; Back to the arcade</a></p>
+<script type="module" src="/static/skate.js"></script>
+{{end}}
