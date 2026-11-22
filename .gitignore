@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+/paradise
+/gbmod
+/artgen
+*.exe
+coverage.out
+# Claude Code: keep local settings out, share the dev-server config.
+.claude/*
+!.claude/launch.json
+/.railway/node_modules/
