@@ -87,7 +87,7 @@ jobs:
           echo "### Coverage: ${total}%" >> "$GITHUB_STEP_SUMMARY"
           awk -v t="$total" -v f="$COVERAGE_FLOOR" 'BEGIN { exit (t + 0 < f + 0) }' || (echo "::error::Coverage ${total}% is below ${COVERAGE_FLOOR}%"; exit 1)
       - name: Game and page logic (node --test)
-        run: node --test internal/web/jstest/
+        run: node --test internal/web/jstest/*.test.mjs
 
   security:
     name: Security
