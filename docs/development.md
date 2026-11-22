@@ -33,7 +33,8 @@ There is no staging, so check the experience locally:
   now, coming soon, arcade, the skate game, guestbook, Top 8, and a 404.
 - Hover every object in the room; the status bar names it.
 - Sign the guestbook; try a link and a bad word in the message.
-- Play a run of Half-Pipe Hero; turn sound on and off.
+- Play each game: Half-Pipe Hero, Fret Night (with sound), Status Effect,
+  Neon Mile. Turn sound on and off.
 
 ## Environment variables
 

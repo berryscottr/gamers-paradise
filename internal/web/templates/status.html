@@ -1,0 +1,23 @@
+{{define "main"}}
+<h1>{{art "title-status" "Status Effect"}}</h1>
+<div class="cabinet">
+  <canvas id="battle" width="640" height="400" tabindex="0" aria-label="Status Effect battle game. Press Enter to start.">Status Effect needs JavaScript and a canvas.</canvas>
+</div>
+<table class="howto">
+  <tr><th colspan="2">How to play</th></tr>
+  <tr><td><kbd>Enter</kbd> or <kbd>Z</kbd></td><td>Start, choose a move, and move the text along</td></tr>
+  <tr><td>Arrow keys</td><td>Move around the menu</td></tr>
+</table>
+<table class="howto">
+  <tr><th>Move</th><th>What it does</th></tr>
+  <tr><td>Vine Lash</td><td>Plain damage. Against a Lv 42, barely a scratch.</td></tr>
+  <tr><td>Sleep Spore</td><td>Puts the foe to sleep for a few turns.</td></tr>
+  <tr><td>Toxic Thorns</td><td>Poison that hurts more every turn.</td></tr>
+  <tr><td>Stun Pollen</td><td>Paralysis: the foe slows down and sometimes can't move.</td></tr>
+  <tr><td>Sap Siphon</td><td>Drains the foe every turn and heals you. Stacks with the others.</td></tr>
+  <tr><td>Dew Drop</td><td>Heals 25 HP. You have three.</td></tr>
+</table>
+<p>The foe can only carry one of sleep, poison or paralysis at a time, and it sometimes shakes poison or paralysis off. No grinding. Just strategy.</p>
+<p class="back"><a href="/arcade">&larr; Back to the arcade</a></p>
+<script type="module" src="/static/battle.js"></script>
+{{end}}

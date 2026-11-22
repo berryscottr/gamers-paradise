@@ -75,3 +75,23 @@ managed in Railway. Railway retires `railway.json` on 2026-12-01.
 The beanbag's select screen lists four games; the skate trick combo game
 ships first and the others show as coming soon. Game rules live in
 `static/skate-core.js` (no DOM) so they're tested with `node --test`.
+
+## ADR-011: All four games ship (2026-11-22)
+
+The beanbag's arcade has four original games, each split into a rules
+module with no DOM (`*-core.js`, tested with `node --test`) and a canvas
+renderer, sharing `static/arcade.js` (pixel surface, font, keys, best
+scores in the browser) and `static/rng.js` (seeded randomness):
+
+- **Half-Pipe Hero**: skate trick combos.
+- **Fret Night**: five-lane rhythm game to "Midnight Riff", an original
+  chiptune the code writes from a seed (A minor, 140 BPM, verse/chorus).
+  Music is scheduled on the Web Audio clock so hits line up with it.
+  Starting a song turns sound on. Lane colors and keys are its own, not a
+  copy of any guitar game's.
+- **Status Effect**: a Lv 12 Thornling against a Lv 42 Magmaul, both
+  original creatures. Tuned by simulation: plain attacks never win, one
+  status alone almost never wins, random play wins about half the time,
+  and combining status, Sap Siphon and heals wins over 90%.
+- **Neon Mile**: a one-mile night street race against three rivals through
+  traffic. A clean run with nitro wins; a couple of crashes lose.

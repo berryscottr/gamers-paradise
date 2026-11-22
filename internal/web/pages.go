@@ -40,21 +40,24 @@ type game struct {
 	Name, Blurb, Href string
 }
 
-// games on the beanbag's select screen. Only the first is built so far.
+// games on the beanbag's select screen.
 var games = []game{
 	{"Half-Pipe Hero", "Skate a half-pipe. Pump, launch, chain flips, grabs and spins, and land clean.", "/arcade/skate"},
-	{"Fret Night", "Five lanes, an original chiptune, expert or bust.", ""},
-	{"Status Effect", "A monster battle you win with sleep, poison and paralysis instead of grinding.", ""},
-	{"Neon Mile", "A top-down street race through a city at night.", ""},
+	{"Fret Night", "Five lanes, an original chiptune, expert or bust.", "/arcade/fret"},
+	{"Status Effect", "A monster battle you win with sleep, poison and paralysis instead of grinding.", "/arcade/status"},
+	{"Neon Mile", "A top-down street race through a city at night.", "/arcade/neon"},
 }
 
 // topEight are the sites on the Top 8 page; empty slots show as open.
 var topEight = []string{}
 
+// gamePages are the playable games; they share the arcade look.
+var gamePages = map[string]bool{"skate": true, "fret": true, "status": true, "neon": true}
+
 var titles = map[string]string{
 	"home": "Gamer's Paradise", "xbox": "The Xbox years", "gameboy": "Game Boy",
 	"shelf": "The shelf", "now": "Right now", "box": "Coming soon", "arcade": "Arcade",
-	"skate": "Half-Pipe Hero", "links": "Top 8", "guestbook": "Guestbook", "notfound": "404",
+	"skate": "Half-Pipe Hero", "fret": "Fret Night", "status": "Status Effect", "neon": "Neon Mile", "links": "Top 8", "guestbook": "Guestbook", "notfound": "404",
 }
 
 func (s *Server) base(ctx context.Context, name string) page {
@@ -62,8 +65,8 @@ func (s *Server) base(ctx context.Context, name string) page {
 	if name != "home" {
 		p.Title += " · Gamer's Paradise"
 	}
-	if name == "skate" {
-		p.Nav = "arcade"
+	if gamePages[name] {
+		p.Nav, p.Era = "arcade", "game"
 	}
 	n, err := s.opt.Store.Visitors(ctx)
 	if err != nil {

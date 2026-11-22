@@ -17,8 +17,10 @@ Best viewed at 1024×768 on a desktop. Phones get the real 2006 experience.
   itself.
 - **Pages dressed in their own era**: Game Boy, the Xbox years, the shelf,
   right now, and a box of upcoming features.
-- **Arcade**: *Half-Pipe Hero*, a skate trick combo game. More cartridges
-  coming.
+- **Arcade**: four original games on the beanbag: *Half-Pipe Hero* (skate
+  trick combos), *Fret Night* (a rhythm game to an original chiptune),
+  *Status Effect* (win a battle with status effects, not grinding) and
+  *Neon Mile* (a night street race).
 - **Guestbook**: no logins; signatures go live with automatic moderation.
 - **Hit counter**: unique visitors per day, counted without storing IPs.
 - **Top 8 and an 88×31 button** for linking back.

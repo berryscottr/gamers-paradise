@@ -187,8 +187,8 @@ kbd { font: bold 11px "Courier New", monospace; background: #eee; border: 2px ou
 .upcoming li { margin: 6px 0; }
 
 /* ---------- arcade ---------- */
-.era-arcade #main, .era-skate #main { background: #08061a; color: #e8e4ff; }
-.era-arcade #main a, .era-skate #main a { color: #fff27a; }
+.era-arcade #main, .era-game #main { background: #08061a; color: #e8e4ff; }
+.era-arcade #main a, .era-game #main a { color: #fff27a; }
 .insert { font: bold 18px "Courier New", monospace; color: #ff5ac8; text-align: center; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { visibility: hidden; } }
 .carts { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
@@ -205,7 +205,7 @@ kbd { font: bold 11px "Courier New", monospace; background: #eee; border: 2px ou
 .howto { border-collapse: collapse; margin: 0 auto 10px; }
 .howto th { background: #3a2a7a; color: #fff; padding: 4px 10px; }
 .howto td { border: 1px solid #3a2a7a; padding: 3px 10px; }
-.era-skate kbd { color: #111; }
+.era-game kbd { color: #111; }
 
 /* ---------- guestbook: lined paper ---------- */
 .era-guestbook #main { background: #8a6440; }

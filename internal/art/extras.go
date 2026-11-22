@@ -24,6 +24,9 @@ var Titles = []Title{
 	{"title-guestbook", "GUESTBOOK", Hex("#b0e0ff"), Hex("#2a5ad8")},
 	{"title-arcade", "ARCADE", Hex("#fff27a"), Hex("#e83a8a")},
 	{"title-skate", "HALF-PIPE HERO", Hex("#a0f0ff"), Hex("#e8803a")},
+	{"title-fret", "FRET NIGHT", Hex("#ffb0e8"), Hex("#a03ae8")},
+	{"title-status", "STATUS EFFECT", Hex("#e0f8a0"), Hex("#2c8a2c")},
+	{"title-neon", "NEON MILE", Hex("#a0f8ff"), Hex("#ff3aa8")},
 	{"title-links", "TOP 8", Hex("#d0c0ff"), Hex("#5a3ab8")},
 	{"title-404", "404", Hex("#ffb0a0"), Hex("#c82a2a")},
 }

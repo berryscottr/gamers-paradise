@@ -39,6 +39,7 @@ Tagline "Spend a day in my childhood". Handle: Sir Games-A-Lot. Public repo.
 | `content/words.txt` | all personal writing, with prompts |
 | `internal/art` | pixel art in code: room, phases, hotspots, titles, font |
 | `internal/web` | handlers, templates, CSS, JS (`static/`), JS tests (`jstest/`) |
+| `internal/web/static/*-core.js` | game rules, no DOM (skate, fret, battle, neon); renderers beside them |
 | `internal/guestbook` | signature cleaning and auto-moderation |
 | `internal/visitor` | daily-rotating visitor hash, bot check |
 | `internal/store` | Postgres and in-memory store, migrations |

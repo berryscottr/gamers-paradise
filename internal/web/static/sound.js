@@ -37,6 +37,35 @@ export function isOn() {
   return on;
 }
 
+let button = null;
+const listeners = [];
+
+function changed() {
+  if (button) paint(button);
+  for (const fn of listeners) fn(on);
+}
+
+// onChange calls fn(on) whenever sound is turned on or off.
+export function onChange(fn) {
+  listeners.push(fn);
+}
+
+// enable turns sound on (for a game the player just started with a key
+// press, which browsers accept as permission to play audio).
+export function enable() {
+  if (!on) {
+    on = true;
+    save(true);
+    changed();
+  }
+  return audio();
+}
+
+// output returns the AudioContext while sound is on, else null.
+export function output() {
+  return on ? audio() : null;
+}
+
 // tone plays one short square-wave note.
 export function tone(freq, dur = 0.06, vol = 0.05, type = "square") {
   if (!on) return;
@@ -104,11 +133,12 @@ function paint(btn) {
 // so a remembered "on" waits for the first click anywhere on the page.
 export function setup(btn, { room = false } = {}) {
   const wanted = load();
+  button = btn;
   paint(btn);
   btn.addEventListener("click", () => {
     on = !on;
     save(on);
-    paint(btn);
+    changed();
     if (on) {
       if (room) startHum();
       jingle([523, 659, 784]);
@@ -120,7 +150,7 @@ export function setup(btn, { room = false } = {}) {
     const wake = (e) => {
       if (on || btn.contains(e.target)) return; // the button's own click decides
       on = true;
-      paint(btn);
+      changed();
       if (room) startHum();
     };
     document.addEventListener("pointerdown", wake, { once: true });

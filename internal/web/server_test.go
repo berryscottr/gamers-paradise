@@ -48,7 +48,7 @@ func get(t *testing.T, h http.Handler, path string, mod ...func(*http.Request)) 
 	return w.Result(), string(body)
 }
 
-var pagePaths = []string{"/", "/xbox", "/gameboy", "/shelf", "/now", "/box", "/arcade", "/arcade/skate", "/links", "/guestbook"}
+var pagePaths = []string{"/", "/xbox", "/gameboy", "/shelf", "/now", "/box", "/arcade", "/arcade/skate", "/arcade/fret", "/arcade/status", "/arcade/neon", "/links", "/guestbook"}
 
 func TestEveryPageRenders(t *testing.T) {
 	s, _ := newServer(t, false)
@@ -150,7 +150,7 @@ func TestMethodsAndBodyLimit(t *testing.T) {
 
 func TestStaticAssetsAndETags(t *testing.T) {
 	s, _ := newServer(t, false)
-	for _, p := range []string{"/static/style.css", "/static/site.js", "/static/skate.js", "/static/skate-core.js", "/static/sound.js", "/static/phase.js", "/static/art/font.js", "/static/art/hotspots.css", "/static/art/room-night.png"} {
+	for _, p := range []string{"/static/style.css", "/static/site.js", "/static/skate.js", "/static/skate-core.js", "/static/sound.js", "/static/phase.js", "/static/arcade.js", "/static/rng.js", "/static/fret.js", "/static/fret-core.js", "/static/battle.js", "/static/battle-core.js", "/static/neon.js", "/static/neon-core.js", "/static/art/font.js", "/static/art/hotspots.css", "/static/art/room-night.png"} {
 		res, _ := get(t, s, p)
 		if res.StatusCode != 200 || res.Header.Get("ETag") == "" {
 			t.Errorf("%s: %d", p, res.StatusCode)
@@ -318,5 +318,26 @@ func TestLinksPageHasButtonCode(t *testing.T) {
 	}
 	if strings.Count(body, `class="open"`) != 8 {
 		t.Error("Top 8 should show 8 open slots")
+	}
+}
+
+func TestEveryArcadeGameIsPlayable(t *testing.T) {
+	s, _ := newServer(t, false)
+	_, body := get(t, s, "/arcade")
+	for _, g := range games {
+		if g.Href == "" {
+			t.Errorf("%s has no page", g.Name)
+			continue
+		}
+		if !strings.Contains(body, `href="`+g.Href+`"`) {
+			t.Errorf("arcade doesn't link %s", g.Href)
+		}
+		res, page := get(t, s, g.Href)
+		if res.StatusCode != 200 || !strings.Contains(page, `<canvas id=`) || !strings.Contains(page, `class="era-game"`) {
+			t.Errorf("%s: %d, missing canvas or game look", g.Href, res.StatusCode)
+		}
+	}
+	if strings.Contains(body, "COMING SOON") {
+		t.Error("a game still says coming soon")
 	}
 }

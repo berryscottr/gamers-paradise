@@ -59,7 +59,7 @@ type asset struct {
 }
 
 // pageNames are the templates in templates/, each rendered inside layout.html.
-var pageNames = []string{"home", "xbox", "gameboy", "shelf", "now", "box", "arcade", "skate", "links", "guestbook", "notfound"}
+var pageNames = []string{"home", "xbox", "gameboy", "shelf", "now", "box", "arcade", "skate", "fret", "status", "neon", "links", "guestbook", "notfound"}
 
 // New builds the server, parsing every template and loading every asset up
 // front so mistakes fail at startup (and in tests), not on a visitor.
@@ -95,7 +95,9 @@ func New(opt Options) (*Server, error) {
 	for _, p := range []string{"xbox", "gameboy", "shelf", "now", "box", "arcade", "links"} {
 		mux.HandleFunc("GET /"+p, s.simple(p))
 	}
-	mux.HandleFunc("GET /arcade/skate", s.simple("skate"))
+	for _, g := range []string{"skate", "fret", "status", "neon"} {
+		mux.HandleFunc("GET /arcade/"+g, s.simple(g))
+	}
 	mux.HandleFunc("GET /guestbook", s.guestbook)
 	mux.HandleFunc("POST /guestbook", s.sign)
 	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, _ *http.Request) {
