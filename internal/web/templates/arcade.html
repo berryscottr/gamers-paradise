@@ -1,0 +1,14 @@
+{{define "main"}}
+<h1>{{art "title-arcade" "Arcade"}}</h1>
+<p class="insert">SELECT A GAME</p>
+<ul class="carts">
+{{range .Games}}
+  <li class="cart{{if not .Href}} soon{{end}}">
+    {{if .Href}}<a href="{{.Href}}"><span class="label">{{.Name}}</span></a>{{else}}<span class="label">{{.Name}}</span>{{end}}
+    <p>{{.Blurb}}</p>
+    <p class="state">{{if .Href}}PRESS START{{else}}COMING SOON{{end}}</p>
+  </li>
+{{end}}
+</ul>
+<p class="back"><a href="/">&larr; Back to the bedroom</a></p>
+{{end}}

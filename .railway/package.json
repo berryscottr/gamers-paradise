@@ -1,0 +1,9 @@
+{
+  "name": "gamers-paradise-railway-iac",
+  "private": true,
+  "description": "Railway infrastructure-as-code for the gamers-paradise service (see railway.ts).",
+  "type": "module",
+  "dependencies": {
+    "railway": "^3.16.0"
+  }
+}

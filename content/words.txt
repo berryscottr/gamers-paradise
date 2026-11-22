@@ -1,0 +1,69 @@
+# Gamer's Paradise: your words
+#
+# Every piece of writing on the site lives here. Each section starts with
+# "== id ==", then a "?" line with the prompt, then your words.
+# Leave a blank line between paragraphs. A section with no words shows its
+# prompt on your local site (so you can see where it goes) and nothing at
+# all in production.
+#
+# Lines starting with # are notes for you and never appear on the site.
+
+== home-welcome ==
+? A short hello under the room. Who's here, and what is this place?
+
+== gameboy-intro ==
+? The green Game Boy Color you took everywhere. Where did it go with you?
+
+== gameboy-grass ==
+? Grass starters, always. Why Bulbasaur first, and why grass every time since?
+
+== gameboy-status ==
+? Status conditions are OP. How did you shut down gym leaders way above your level without grinding?
+
+== xbox-intro ==
+? The Xbox and the CRT at the foot of your bed. What did a night with nowhere to be in the morning look like?
+
+== xbox-gamertag ==
+? Sir Games-A-Lot, from your Xbox gamertag to your Steam profile today. Where did the name come from?
+
+== xbox-nfs ==
+? Need for Speed. What do you remember about it?
+
+== xbox-kotor ==
+? Knights of the Old Republic. What pulled you in?
+
+== xbox-thps ==
+? Tony Hawk's. What do you remember about it?
+
+== xbox-gh3 ==
+? Guitar Hero 3, your first and true one. Crushing the hardest songs on expert, and why "One" by Metallica was the favorite.
+
+== shelf-intro ==
+? A line or two about the shelf: the games and minis you kept around.
+
+== shelf-baldurs-gate ==
+? Baldur's Gate. What do you remember about it?
+
+== shelf-flash ==
+? Miniclip and Addicting Games on the new laptop (Christmas 2005). What did you play?
+
+== shelf-myspace ==
+? MySpace, a few years later. What was your page like?
+
+== now-intro ==
+? You're grown up now and still in it. A line about what you pour your passion into today.
+
+== now-hades ==
+? The Hades series. What makes it yours?
+
+== now-persona ==
+? The Persona series. What makes it yours?
+
+== now-jojo ==
+? JoJo's Bizarre Adventure. What makes it yours?
+
+== guestbook-intro ==
+? A line inviting people to sign the guestbook.
+
+== links-intro ==
+? A line for your Top 8 page: the sites you like, and an invitation to link back with your button.

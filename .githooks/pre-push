@@ -1,0 +1,12 @@
+#!/bin/sh
+# Refuse direct pushes to main: changes go through PRs (GitHub branch
+# protection enforces this too; the hook just fails faster).
+#
+# Enable once per clone:   git config core.hooksPath .githooks
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "refs/heads/main" ] && [ "$ALLOW_MAIN_PUSH" != "1" ]; then
+    echo "pre-push: direct pushes to main are blocked. Push a branch and open a PR." >&2
+    exit 1
+  fi
+done
+exit 0

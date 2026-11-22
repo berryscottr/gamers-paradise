@@ -1,0 +1,3 @@
+# LF everywhere so generated files (and the art drift test) match on Windows and Linux.
+* text=auto eol=lf
+*.png binary

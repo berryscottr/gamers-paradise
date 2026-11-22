@@ -1,0 +1,30 @@
+{{define "main"}}
+<h1>{{art "title-xbox" "The Xbox years"}}</h1>
+{{say "xbox-intro"}}
+<div class="gamercard">
+  <div class="tag">Sir Games-A-Lot</div>
+  <div class="since">Xbox gamertag then &middot; Steam profile now</div>
+</div>
+{{say "xbox-gamertag"}}
+<div class="blades">
+  <div class="blade" id="need-for-speed">
+    <h2>Need for Speed</h2>
+    {{say "xbox-nfs"}}
+  </div>
+  <div class="blade" id="kotor">
+    <h2>Knights of the Old Republic</h2>
+    {{say "xbox-kotor"}}
+  </div>
+  <div class="blade" id="tony-hawk">
+    <h2>Tony Hawk's</h2>
+    {{say "xbox-thps"}}
+    <p class="aside">The skateboard under the desk is a playable nod: <a href="/arcade/skate">Half-Pipe Hero</a>.</p>
+  </div>
+  <div class="blade" id="guitar-hero">
+    <h2>Guitar Hero 3</h2>
+    <p class="setlist">Favorite: <b>"One"</b> by Metallica &middot; Expert &middot; <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
+    {{say "xbox-gh3"}}
+  </div>
+</div>
+<p class="back"><a href="/">&larr; Back to the bedroom</a></p>
+{{end}}

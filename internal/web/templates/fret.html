@@ -1,0 +1,16 @@
+{{define "main"}}
+<h1>{{art "title-fret" "Fret Night"}}</h1>
+<div class="cabinet">
+  <canvas id="fret" width="640" height="400" tabindex="0" aria-label="Fret Night rhythm game. Press Enter to start.">Fret Night needs JavaScript and a canvas.</canvas>
+</div>
+<table class="howto">
+  <tr><th colspan="2">How to play</th></tr>
+  <tr><td><kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>Pick normal or expert</td></tr>
+  <tr><td><kbd>Enter</kbd></td><td>Start the song (this turns sound on)</td></tr>
+  <tr><td><kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>F</kbd> <kbd>G</kbd></td><td>Hit each lane as its note crosses the line</td></tr>
+  <tr><td><kbd>Esc</kbd></td><td>Walk off stage</td></tr>
+</table>
+<p>Every 10 notes in a row raises your multiplier, up to &times;4. Misses and stray presses break the streak and lose the crowd. Lose them all and the show's over. The song, "Midnight Riff," is an original chiptune the site writes in code.</p>
+<p class="back"><a href="/arcade">&larr; Back to the arcade</a></p>
+<script type="module" src="/static/fret.js"></script>
+{{end}}

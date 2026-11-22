@@ -1,0 +1,16 @@
+{{define "main"}}
+<div class="room" id="room" data-phases="{{.Phases}}">
+  <img id="room-img" src="/static/art/room-night.png" width="960" height="600" alt="A kid's bedroom late at night, lit by a CRT TV at the foot of the bed. Every object in it is a link.">
+  {{range .Hotspots}}{{if .Href}}<a class="hs hs-{{.ID}}" href="{{.Href}}" title="{{.Label}}" data-label="{{.Label}}"><span class="sr">{{.Label}}</span></a>
+  {{else}}<span class="hs hs-{{.ID}}" title="{{.Label}}" data-label="{{.Label}}"></span>
+  {{end}}{{end}}
+  <div id="loading" class="loading" hidden>
+    <p>LOADING...</p>
+    <div class="bar"><div class="fill"></div></div>
+  </div>
+</div>
+<div class="statusbar" id="status" aria-live="polite">Point at something in the room.</div>
+<div class="welcome">
+{{say "home-welcome"}}
+</div>
+{{end}}

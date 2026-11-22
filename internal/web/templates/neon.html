@@ -1,0 +1,17 @@
+{{define "main"}}
+<h1>{{art "title-neon" "Neon Mile"}}</h1>
+<div class="cabinet">
+  <canvas id="neon" width="640" height="400" tabindex="0" aria-label="Neon Mile racing game. Press Enter to start.">Neon Mile needs JavaScript and a canvas.</canvas>
+</div>
+<table class="howto">
+  <tr><th colspan="2">How to play</th></tr>
+  <tr><td><kbd>Enter</kbd></td><td>Start the race</td></tr>
+  <tr><td><kbd>&uarr;</kbd></td><td>Gas</td></tr>
+  <tr><td><kbd>&darr;</kbd></td><td>Brake</td></tr>
+  <tr><td><kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>Steer</td></tr>
+  <tr><td><kbd>Space</kbd> (hold)</td><td>Nitro</td></tr>
+</table>
+<p>One mile of city street at night against Viper, Ghost and Blaze. Weave through traffic: a near miss tops up your nitro, and a crash costs you most of your speed.</p>
+<p class="back"><a href="/arcade">&larr; Back to the arcade</a></p>
+<script type="module" src="/static/neon.js"></script>
+{{end}}

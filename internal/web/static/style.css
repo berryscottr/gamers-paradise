@@ -1,0 +1,240 @@
+/* Gamer's Paradise. Fixed-width, desktop-only, built for 1024x768 on
+   purpose (ADR-002). Each object's page dresses in its own era via
+   body.era-*. No inline styles anywhere: the CSP forbids them. */
+
+* { box-sizing: border-box; }
+html { background: #140c2a url(/static/art/bg.png); }
+body {
+  margin: 0;
+  padding: 12px 0 24px;
+  min-width: 1000px;
+  font: 13px/1.5 Verdana, Tahoma, Geneva, sans-serif;
+  color: #1a1a1a;
+  cursor: url(/static/art/cursor.png) 0 0, default;
+}
+a, button, summary, label { cursor: url(/static/art/pointer.png) 5 0, pointer; }
+a { color: #0033cc; }
+a:visited { color: #663399; }
+a:hover { color: #cc0033; }
+img { image-rendering: pixelated; border: 0; vertical-align: middle; }
+h1 { margin: 6px 0 10px; }
+h2 { font: bold 15px Tahoma, Verdana, sans-serif; margin: 16px 0 6px; }
+kbd { font: bold 11px "Courier New", monospace; background: #eee; border: 2px outset #ccc; padding: 0 4px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+#page { width: 1000px; margin: 0 auto; }
+
+#masthead {
+  position: relative;
+  height: 108px;
+  padding: 14px 20px 0;
+  background: linear-gradient(#3a2a7a, #160e3a);
+  border: 2px solid #8a7ae8;
+  border-bottom: 0;
+}
+#masthead .logo { display: inline-block; }
+#masthead .tagline {
+  margin: 4px 0 0 6px;
+  font: italic bold 14px Georgia, "Times New Roman", serif;
+  color: #ffe9a0;
+  letter-spacing: 1px;
+}
+.sound {
+  position: absolute; right: 16px; top: 16px;
+  background: #e8e4dc; border: 2px outset #fff; padding: 4px;
+}
+.sound:active { border-style: inset; }
+
+#nav {
+  list-style: none; margin: 0; padding: 0 8px;
+  height: 30px;
+  background: linear-gradient(#f4f0ff, #b8b0e8 50%, #9a90d8 51%, #c8c0f0);
+  border: 2px solid #8a7ae8; border-top: 1px solid #fff;
+}
+#nav li { float: left; }
+#nav a {
+  display: block; padding: 5px 13px; height: 28px;
+  font: bold 12px Tahoma, Verdana, sans-serif; color: #1a1050; text-decoration: none;
+  border-right: 1px solid #8a80c8;
+}
+#nav a:hover { background: #fff6c0; color: #a01040; }
+#nav a.on { background: #fff; color: #a01040; }
+
+#main {
+  min-height: 420px;
+  padding: 16px 20px 20px;
+  background: #fffdf4;
+  border: 2px solid #8a7ae8; border-top: 0;
+}
+
+#footer { text-align: center; color: #d8d0ff; font-size: 11px; padding-top: 12px; }
+#footer a { color: #fff27a; }
+.counter { font: bold 12px Tahoma, sans-serif; margin-bottom: 8px; }
+.odo { display: inline-block; vertical-align: middle; border: 2px inset #888; background: #000; padding: 1px; }
+.odo span {
+  display: inline-block; width: 14px; margin: 0 1px; text-align: center;
+  font: bold 15px "Courier New", monospace; color: #7aff5a;
+  background: linear-gradient(#1a1a1a, #000 50%, #1a1a1a);
+}
+.badge { display: inline-block; margin: 4px 0; }
+
+.prompt {
+  border: 2px dashed #d8a020; background: #fff8d0; color: #6a4a00;
+  padding: 6px 10px; font-size: 12px;
+}
+.prompt code { font-size: 11px; }
+.back { margin-top: 24px; font-weight: bold; }
+
+/* ---------- the bedroom ---------- */
+.era-home #main { padding: 18px 0 20px; background: #0a0818; color: #e8e4ff; }
+.era-home #main a { color: #fff27a; }
+.room {
+  position: relative; width: 966px; height: 606px; margin: 0 auto;
+  border: 3px solid #000; box-shadow: 0 0 0 2px #8a7ae8;
+  background: #000;
+}
+.room #room-img { display: block; }
+.room.zoom #room-img { transition: transform .7s steps(7); transform: scale(4); transform-origin: 78% 46%; }
+.hs { position: absolute; display: block; }
+.hs:hover, .hs:focus-visible { outline: 3px dashed #fff27a; outline-offset: -3px; }
+.hs-window { cursor: url(/static/art/cursor.png) 0 0, help; }
+.statusbar {
+  width: 966px; margin: 6px auto 0; padding: 2px 8px;
+  font: 11px Tahoma, sans-serif; color: #111;
+  background: #d4d0c8; border: 2px inset #fff;
+}
+.welcome { width: 966px; margin: 14px auto 0; font-size: 14px; }
+.loading {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; background: #fff;
+  font: bold 14px Arial, sans-serif; color: #333;
+}
+.loading[hidden] { display: none; }
+.loading .bar { width: 300px; height: 18px; border: 2px solid #333; padding: 2px; }
+.loading .fill { height: 100%; width: 0; background: repeating-linear-gradient(90deg, #ff9a1a 0 10px, #ffc84a 10px 20px); animation: load 1.2s steps(12) forwards; }
+@keyframes load { to { width: 100%; } }
+
+/* ---------- Game Boy: a handheld screen ---------- */
+.era-gameboy #main { background: #4f9a2c; }
+.handheld {
+  width: 700px; margin: 0 auto; padding: 26px 26px 10px;
+  background: #5aa834; border: 4px solid #2c5a16; border-radius: 18px 18px 60px 18px;
+}
+.handheld .screen {
+  padding: 18px 26px; background: #9bbc0f; color: #0f380f;
+  border: 14px solid #2a2a34; border-radius: 6px;
+  font: 13px/1.6 "Courier New", monospace;
+}
+.handheld h2 { color: #0f380f; font-family: "Courier New", monospace; text-transform: uppercase; }
+.handheld .prompt { background: #8bac0f; border-color: #306230; color: #0f380f; }
+.status-chart { border-collapse: collapse; margin-top: 10px; }
+.status-chart th, .status-chart td { border: 2px solid #306230; padding: 3px 8px; text-align: left; }
+.status-chart th { background: #306230; color: #9bbc0f; }
+.controls { height: 60px; position: relative; }
+.dpad { position: absolute; left: 40px; top: 14px; width: 36px; height: 36px; background: linear-gradient(#1a1a1a, #1a1a1a) center/12px 36px no-repeat, linear-gradient(#1a1a1a, #1a1a1a) center/36px 12px no-repeat; }
+.ab { position: absolute; right: 40px; top: 12px; }
+.ab span { display: inline-block; width: 30px; height: 30px; margin-left: 10px; border-radius: 50%; background: #7a1e1c; color: #f0c0c0; text-align: center; font: bold 12px/30px Arial, sans-serif; }
+.era-gameboy .back a { color: #0f380f; }
+
+/* ---------- Xbox years: green glow on black ---------- */
+.era-xbox #main { background: #050a05; color: #c8f0b0; }
+.era-xbox #main a { color: #8aff5a; }
+.era-xbox h2 { color: #8aff5a; text-shadow: 0 0 6px #2aa02a; }
+.gamercard {
+  width: 340px; margin: 10px 0; padding: 10px 14px;
+  background: linear-gradient(#1a3a1a, #0a1a0a); border: 2px solid #4aca2a; border-radius: 8px;
+}
+.gamercard .tag { font: bold 20px Tahoma, sans-serif; color: #fff; }
+.gamercard .since { font-size: 11px; color: #8aca7a; }
+.blades { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.blade { padding: 4px 14px 10px; border: 2px solid #2a6a1a; background: #0c160c; border-radius: 0 16px 0 16px; }
+.era-xbox .prompt { background: #1a2a0a; border-color: #8aca2a; color: #d8f0a0; }
+.setlist .stars { color: #ffd84a; }
+.aside { font-size: 11px; color: #8aaa7a; }
+
+/* ---------- the shelf: wood ---------- */
+.era-shelf #main { background: repeating-linear-gradient(90deg, #7a5532 0 18px, #74502f 18px 36px); color: #fff4e0; }
+.era-shelf #main a { color: #ffe08a; }
+.plank { margin: 12px 0; padding: 4px 16px 10px; background: #946a42; border-bottom: 8px solid #5a3d22; box-shadow: 0 4px 0 #3a2814; }
+.spines { list-style: none; margin: 0; padding: 0; }
+.spines li { margin: 3px 0; padding: 3px 10px; border-left: 14px solid; background: rgba(0, 0, 0, .2); }
+.spines span { font-size: 11px; color: #f0d8b8; margin-left: 6px; }
+.sp-green { border-color: #2a8a3a; } .sp-black { border-color: #1a1a1a; } .sp-red { border-color: #b82a2a; }
+.sp-blue { border-color: #2a4a9a; } .sp-gold { border-color: #c8a020; } .sp-orange { border-color: #e05a1a; }
+.sp-grey { border-color: #8a8a8a; } .sp-navy { border-color: #1a2a6a; } .sp-crimson { border-color: #7a1a1a; }
+.sp-purple { border-color: #6a3ab0; }
+.era-shelf .prompt { background: #fff0c8; }
+
+/* ---------- right now: the triptych poster ---------- */
+.era-now #main { background: #120818; color: #f0e8ff; }
+.era-now #main a { color: #ffb0d8; }
+.triptych { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 6px solid #000; }
+.panel { padding: 6px 14px 14px; min-height: 260px; }
+.panel h2 { color: #fff; }
+.p-hades { background: #3a0e12; border-right: 3px solid #000; }
+.p-persona { background: #14306e; border-right: 3px solid #000; }
+.p-jojo { background: #5a2a7a; }
+.menace { font-size: 30px; color: #ee8cb4; letter-spacing: 6px; margin: 10px 0 0; }
+.era-now .prompt { background: #2a1a3a; border-color: #ee8cb4; color: #f8d8ff; }
+
+/* ---------- coming soon: cardboard and hazard tape ---------- */
+.era-box #main { background: #c89a6a; }
+.hazard { height: 18px; background: repeating-linear-gradient(-45deg, #111 0 14px, #f4d84a 14px 28px); margin: 0 -20px; }
+.ticker { overflow: hidden; white-space: nowrap; background: #000; color: #f4d84a; font: bold 12px "Courier New", monospace; padding: 2px 0; }
+.ticker span { display: inline-block; padding-left: 100%; animation: ticker 14s linear infinite; }
+@keyframes ticker { to { transform: translateX(-100%); } }
+.upcoming { font-size: 14px; background: #f8ecd8; border: 2px dashed #8e6640; padding: 10px 10px 10px 34px; }
+.upcoming li { margin: 6px 0; }
+
+/* ---------- arcade ---------- */
+.era-arcade #main, .era-game #main { background: #08061a; color: #e8e4ff; }
+.era-arcade #main a, .era-game #main a { color: #fff27a; }
+.insert { font: bold 18px "Courier New", monospace; color: #ff5ac8; text-align: center; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { visibility: hidden; } }
+.carts { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.cart { background: #4a4a52; border: 3px solid #222; border-radius: 6px 6px 0 0; padding: 10px; color: #ddd; font-size: 12px; }
+.cart .label { display: block; padding: 18px 6px; text-align: center; font: bold 14px Tahoma, sans-serif; color: #111; background: linear-gradient(#fff27a, #ff9a3a); border: 2px solid #111; }
+.cart a { text-decoration: none; }
+.cart a:hover .label { background: linear-gradient(#fff, #fff27a); }
+.cart.soon .label { background: #888; color: #333; }
+.cart .state { font: bold 11px "Courier New", monospace; color: #7aff5a; }
+.cart.soon .state { color: #aaa; }
+.cabinet { width: 664px; margin: 0 auto 14px; padding: 9px; background: #222; border: 3px solid #555; border-radius: 6px; }
+#skate { display: block; width: 640px; height: 400px; background: #000; image-rendering: pixelated; outline: none; }
+#skate:focus-visible { box-shadow: 0 0 0 3px #fff27a; }
+.howto { border-collapse: collapse; margin: 0 auto 10px; }
+.howto th { background: #3a2a7a; color: #fff; padding: 4px 10px; }
+.howto td { border: 1px solid #3a2a7a; padding: 3px 10px; }
+.era-game kbd { color: #111; }
+
+/* ---------- guestbook: lined paper ---------- */
+.era-guestbook #main { background: #8a6440; }
+.paper {
+  padding: 12px 30px 20px 60px;
+  background: #fffef6 repeating-linear-gradient(#fffef6 0 23px, #9ab4d8 23px 24px);
+  border-left: 3px double #e88a8a; box-shadow: 4px 4px 0 #5a3d22;
+}
+.sign input, .sign textarea { font: 13px Verdana, sans-serif; border: 2px inset #ccc; padding: 2px 4px; background: #fff; }
+.sign input { width: 320px; }
+.sign button { font: bold 12px Tahoma, sans-serif; padding: 3px 12px; background: #e8e4dc; border: 2px outset #fff; }
+.sign .hp { position: absolute; left: -9999px; }
+.small { font-size: 11px; color: #555; }
+.thanks { background: #e8ffd8; border: 2px solid #4a9a2a; padding: 4px 10px; font-weight: bold; }
+.problems { background: #ffe8e8; border: 2px solid #c82a2a; padding: 6px 10px 6px 28px; color: #8a1010; }
+.entry { border-top: 1px dashed #9ab4d8; padding: 4px 0; }
+.entry .who { margin: 0; font-weight: bold; }
+.entry .when { font-weight: normal; font-size: 11px; color: #777; margin-left: 6px; }
+.entry .msg { margin: 2px 0 6px; white-space: pre-line; overflow-wrap: anywhere; }
+.empty { font-style: italic; }
+
+/* ---------- Top 8: a 2006 profile page ---------- */
+.era-links #main { background: #e5ecf9; }
+.profile { width: 600px; border: 1px solid #6698cb; background: #fff; }
+.profile-head { background: #ffcc99; color: #ff6600; font: bold 12px Verdana, sans-serif; padding: 3px 8px; }
+.top8 { list-style: none; margin: 0; padding: 10px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.top8 li { height: 70px; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 11px; overflow-wrap: anywhere; padding: 4px; }
+.top8 .open { color: #999; }
+.code { font: 12px "Courier New", monospace; width: 100%; }
+
+/* ---------- 404 ---------- */
+.era-notfound #main { text-align: center; font-size: 15px; }
